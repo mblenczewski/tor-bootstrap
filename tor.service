@@ -1,0 +1,30 @@
+[Unit]
+Description=Anonymising Overlay Network
+After=network.target
+
+[Service]
+Type=forking
+User=tor
+Group=tor
+PIDFile=/var/run/tor/tor.pid
+KillSignal=SIGINT
+LimitNOFILE=8192
+PrivateDevices=yes
+PrivateTmp=yes
+
+## permission-related exec options are only applied to ExecStart, so
+## that initialisation can be done unobstructed
+PermissionsStartOnly=true
+
+## copy torrc to runtime directory
+ExecStartPre=-/usr/bin/mkdir /var/run/tor
+ExecStartPre=/usr/bin/cp /usr/local/tor/etc/tor/torrc /var/run/tor
+ExecStartPre=/usr/bin/chmod a-wx,go-rwx /var/run/tor/torrc
+ExecStartPre=/usr/bin/chown -R tor:tor /var/run/tor
+
+ExecStart=/usr/local/tor/bin/tor -f /var/run/tor/torrc
+
+ExecReload=/usr/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target
