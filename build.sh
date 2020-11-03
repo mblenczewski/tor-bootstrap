@@ -4,7 +4,6 @@
 export ROOT=$(pwd)
 export SOURCES="${ROOT}/src"
 export LOGS="${ROOT}/logs"
-export MAKEFLAGS="-j$(nproc)"
 
 export ZLIB_PREFIX="/usr/local/zlib"
 export LIBEVENT_PREFIX="/usr/local/libevent"
@@ -89,7 +88,7 @@ EXTRACT () {
 ###### NAME		VERSION		COMPRESSION	DIR_PREFIX	ARCHIVE_PREFIX
 DEFINE "ZLIB"		"1.2.11" 	"gz"		"zlib-"		"zlib-"
 DEFINE "LIBEVENT"	"2.1.12-stable"	"gz"		"libevent-"	"libevent-"
-DEFINE "LIBRESSL"	"3.2.1"		"gz"		"libressl-"	"libressl-"
+DEFINE "LIBRESSL"	"3.2.2"		"gz"		"libressl-"	"libressl-"
 DEFINE "TOR"		"0.4.4.5"	"gz"		"tor-"		"tor-"
 
 
