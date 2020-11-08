@@ -5,11 +5,11 @@ export ROOT=$(pwd)
 export SOURCES="${ROOT}/src"
 export LOGS="${ROOT}/logs"
 
-export ZLIB_PREFIX="/usr/local/zlib"
-export LIBEVENT_PREFIX="/usr/local/libevent"
-export LIBRESSL_PREFIX="/usr/local/libressl"
+export ZLIB_PREFIX="/usr/local"
+export LIBEVENT_PREFIX="/usr/local"
+export LIBRESSL_PREFIX="/usr/local"
 
-export TOR_PREFIX="/usr/local/tor"
+export TOR_PREFIX="/usr/local"
 export TOR_USER=tor
 export TOR_GROUP=tor
 
@@ -150,15 +150,15 @@ TOR () {
 
 	make && make install
 
-	cp ${ROOT}/tor.service /lib/systemd/system/tor.service
-
-	cp ${ROOT}/torrc ${TOR_PREFIX}/etc/tor/torrc
+	cp ${ROOT}/conf/torrc ${TOR_PREFIX}/etc/tor/torrc
 
 	groupadd ${TOR_GROUP}
 	useradd ${TOR_USER} -g ${TOR_GROUP}
 
-	mkdir /var/{lib,log}/tor
-	chown -R tor:tor /var/{lib,log}/tor
+	mkdir /var/{lib,log,run}/tor
+	chown -R tor:tor /var/{lib,log,run}/tor
+
+	touch /var/run/tor/tor.pid
 }
 EXTRACT "TOR" TOR "tor"
 
