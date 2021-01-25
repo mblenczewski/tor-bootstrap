@@ -6,4 +6,4 @@ chmod a-wx,go-rwx /var/run/tor/torrc
 chown -R tor:tor /var/run/tor
 
 exec 2>&1
-exec -P -u tor:tor /usr/local/bin/tor -f /var/run/tor/torrc
+exec chpst -P -u tor:tor /usr/local/bin/tor -f /var/run/tor/torrc
